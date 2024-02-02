@@ -1,0 +1,190 @@
+{% include 'pages/navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loreto Family Apartment </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/services.css' %}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="flex flex-col gap-2 bg-gray-50 min-h-screen ">
+        <div class="h-auto w-full grid grid-cols-3 grid-flow-row gap-5">
+        </div>
+    <header class="bg-orange-600 text-white p-4 text-center">
+        <h1 class="text-4xl font-bold">Loreto Family Apartment</h1>
+        <p class="text-white">Your Home, Our Priority</p>
+    </header>
+
+   
+
+
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'services' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" placeholder="Apartment Number"
+                class="inpur-file input-file-sm input-file-accent bg-white">
+            <input type="number" name="apartment_number" placeholder="Apartment Number"
+                class="input input-sm input-primary bg-white">
+            <input type="number" name="number_bed_rooms" placeholder="Number Bed" class="input input-sm input-primary">
+            <input type="number" name="number_bath_rooms" placeholder="Bath" class="input input-sm input-primary">
+            <input type="number" name="rent_amount" placeholder="Rent Amount" class="input input-sm input-primary">
+            <input type="date" name="lease_start_date" placeholder="Lease Start Date"
+                class="input input-sm input-primary">
+            <input type="date" name="lease_end_date" placeholder="lease End Date" class="input input-sm input-primary">
+            <button class="btn btn-xs btn-primary">Submit</button>
+        </form>
+        {% endif %}
+
+
+
+        <div class=" overflow-x-auto bg-white">
+            <table class="table table-xs">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Apartment Number</th>
+                        <th>Bedrooms</th>
+                        <th>Bathrooms</th>
+                        <th>Rent</th>
+                        <th>
+                            Action
+                        </th>
+                        <!-- <th>Last Login</th>
+                        <th>Favorite Color</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for apartment in apartments %}
+
+                    <tr>
+                        <th>
+                            <img src="{{apartment.image.url}}" alt="" srcset="" class="object object-center h-12 w-12">
+                        </th>
+                        <td>{{apartment.ApartmentNumber}}</td>
+                        <td>{{apartment.NumBedrooms}}</td>
+                        <td>{{apartment.NumBathrooms}}</td>
+                        <td>{{apartment.RentAmount}}</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <a href="{% url 'service_show' apartment.id %}" class="btn btn-accent btn-xs">
+                                    view 
+                                </a>
+                                <a href="{% url 'service_delete' apartment.id %}" class="btn btn-error btn-xs">
+                                    delete
+                                </a>
+                            </div>
+                        </td>
+                        <!-- <td>12/16/2020</td>
+                        <td>Blue</td> -->
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+                <!-- <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Job</th>
+                        <th>company</th>
+                        <th>location</th>
+                        <th>Last Login</th>
+                        <th>Favorite Color</th>
+                    </tr>
+                </tfoot> -->
+            </table>
+        </div>
+ <section class=" w-full h-full bg-orange-100 text-black-600 body-font">
+            <div class="container px-5 py-24 mx-auto">
+              <div class="flex flex-col text-center w-full mb-20">
+               <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Loreto Family Apartment</h1>
+                <p class="text-black-500 lg:w-2/3 mx-auto leading-relaxed text-base">Loreto Family Apartment is dedicated to providing a comprehensive set of services to enhance your living
+                    experience. Our offerings include:</p>
+              </div>
+              <div class="flex flex-wrap">
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                  <h2 class="text-lg sm:text-xl text-gray-900 font-bold title-font mb-2">Quick Maintenance Help:</h2>
+                  <p class="text-gray-900 leading-relaxed text-base mb-4"> Our responsive maintenance team is available to address any
+                    issues promptly.</p>
+                 
+                
+                </div>
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                  <h2 class=" font-bold text-lg sm:text-xl text-gray-900 title-font mb-2">Continuous Security Surveillance:</h2>
+                  <p class="text-gray-900 leading-relaxed text-base mb-4">Your safety is paramount. We provide 24/7 security
+                    surveillance to ensure a secure living environment.</p>
+                 
+                
+                </div>
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                  <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Management of Amenities:</h2>
+                  <p class=" text-gray-900 leading-relaxed text-base mb-4">Enjoy well-maintained and modern amenities for your comfort
+                    and convenience.</p>
+                  
+             
+                </div>
+               
+               <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                  <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Community Events:</h2>
+                  <p class="text-gray-900 leading-relaxed text-base mb-4">Be a part of our vibrant community with regular events and
+                    activities.</p> 
+
+                </div>
+                <div class="flex flex-wrap">
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                  <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Online Portal:</h2>
+                  <p class="text-gray-900 leading-relaxed text-base mb-4"> Access important information and services conveniently through our
+                    online portal.</p>
+                  
+             
+                </div>
+            
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Package Handling:</h2>
+              <p class="text-gray-900 leading-relaxed text-base mb-4">We assist in handling your packages for added convenience.</p>
+              
+         
+            </div>
+            
+
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Support for Utilities Management:</h2>
+                <p class="text-gray-900 leading-relaxed text-base mb-4">Let us take care of utilities management to make
+                    your life hassle-free.</p>
+                
+           
+              </div>
+              
+              <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Concierge Services:</h2>
+                <p class="text-gray-900 leading-relaxed text-base mb-4"> Our concierge services are designed to make your daily tasks more
+                    manageable.</p>
+                
+           
+              </div>
+              <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Green Initiatives:</h2>
+                <p class="text-gray-900 leading-relaxed text-base mb-4"> We are committed to sustainable living through various green
+                    initiatives.</p>
+                
+           
+              </div>
+              <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class=" font-bold text-lg sm:text-xl text-gray-900  title-font mb-2">Access to Educational Resources:</h2>
+                <p class="text-gray-900 leading-relaxed text-base mb-4"> Enhance your knowledge with access to educational
+                resources.</p>
+                
+            </div>
+          </section>
+        
+
+</body>
+
+</html>

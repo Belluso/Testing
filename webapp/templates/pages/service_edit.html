@@ -1,0 +1,42 @@
+{% include 'pages/navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loreto Family Apartment </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/services.css' %}">
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Loreto Family Apartment</h1>
+        <p>Your Home, Our Priority</p>
+    </header>
+
+    <section>
+        <div class="flex items-center gap-5">
+            <a href="{% url 'service_show' service.id %}" class="btn btn-accent text-white">back</a>
+            <h2>Services Edit</h2>
+
+        </div>
+       
+
+        <div class="w-full h-autio p-2 flex gap-2">
+           <form action="{% url 'service_edit' service.id %}" method="post" enctype="multipart/form-data" class="flex flex-col text-black text-lg font-bold">
+            {% csrf_token %}
+            {{apartment_form}}
+            <button class="btn btn-accent">Update</button>
+           </form>
+        </div>
+
+
+</body>
+
+</html>

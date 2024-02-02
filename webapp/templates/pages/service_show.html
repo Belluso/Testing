@@ -1,0 +1,65 @@
+{% include 'pages/navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loreto Family Apartment </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/services.css' %}">
+   
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Loreto Family Apartment</h1>
+        <p>Your Home, Our Priority</p>
+    </header>
+
+    <section>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-5">
+                <a href="{% url 'services' %}" class="btn btn-accent text-white">back</a>
+                <h2>Services</h2>
+    
+            </div>
+            <div class="flex items-center gap-5">
+                <a href="{% url 'service_edit' service.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'service_delete' service.id %}" class="btn btn-error">Delete</a>
+            </div>
+        </div>
+     
+
+        <div class="w-full h-autio p-2 flex gap-2">
+            <img src="{{service.image.url}}" alt="" srcset="" class="h-96 w-auto object object-center">
+            <div class="flex flex-col gap-2 w-full">
+                <div class="flex justify-between text-3xl font-bold border-b-2 border-gray-100">
+                    <h1>Apartment #</h1>
+                    <h1>{{service.ApartmentNumber}}</h1>
+                </div>
+                <div class="flex justify-between text-3xl font-bold border-b-2 border-gray-100">
+                    <h1>Number of Bedrooms #</h1>
+                    <h1>{{service.NumBedrooms}}</h1>
+                </div>
+                <div class="flex justify-between text-3xl font-bold border-b-2 border-gray-100">
+                    <h1>Number of Bathrooms #</h1>
+                    <h1>{{service.NumBathrooms}}</h1>
+                </div>
+                <div class="flex justify-between text-3xl font-bold border-b-2 border-gray-100">
+                    <h1>Rent  #</h1>
+                    <h1>₱ {{service.RentAmount}}</h1>
+                </div>
+            </div>
+        </div>
+
+
+      
+
+
+</body>
+
+</html>
